@@ -10,6 +10,7 @@ import TopNavBar from './components/TopNavBar.vue'
 import LeftNavBar from './components/LeftNavBar.vue'
 import ToDoList from './components/ToDoList.vue'
 
+
 export default {
     name: 'app',
     components: {
@@ -31,7 +32,7 @@ export default {
 }
 
 body {
-	background-color: #FEFBF3;
+	background-color: #fffefc;
 }
 
 </style>

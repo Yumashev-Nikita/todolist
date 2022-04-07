@@ -1,35 +1,25 @@
 <template>
-
-    <div class="container">
-        <table>
-            <tr>
-                <td><div class="bold-text-container">Сегодня</div><div class="bleak-text-container">{{ message }}</div></td>
-                <td><HoverImgButton type="line" @click="AddToDo"    path="Icon_plus.svg" BgColor="#cefdae" BgColorHover="#67ff00"/></td>
-                <td><HoverImgButton type="line" @click="changeToDo" path="Icon_edit.svg" BgColor="#ffd470" BgColorHover="#ffb200"/></td>
-                <td><HoverImgButton type="line" @click="ChangeCrossBtnsVisiblity" path="Icon_close.svg" BgColor="#f7b1b1" BgColorHover="#ff2e2e"/></td>
-            </tr>
-            <tr>
-                <td>
-                    <ul>
-                        <div class="text-container">
-                            <li v-for="(todo, index) in todos" :key="index" @click="changePickedIndex(index)"> <div  v-if="index != pickedIndex">{{ todo }}</div>
-                                <HoverImgButton class="to-right" v-if="CrossVisibility && index != pickedIndex" @click="DeleteToDo(index)" type="line" path="Icon_close.svg" BgColor="#FEFBF3" BgColorHover="#f7b1b1"/>
-                                <div class="input-container" v-if="index === pickedIndex"><input placeholder="Type your task:"></div>
-                            </li>
-                        </div>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-    </div>
+<div class="main-container">
+    <div class="bold-text-container">Сегодня</div><div class="bleak-text-container">{{ message }}</div>
+    <ul>
+        <li v-for="item in TaskWindows" :key="item.id">
+            <TaskWindow :status="item.status"/>
+        </li>
+        <li>
+            <HoverImgButton @click="addTask" type="line" path="Icon_plus.svg" size="3px" borderRadius="5px" BgColorHover="#f0f0f0"/>
+        </li>
+    </ul>
+</div>
 
 </template>
 
 <script>
 
 import HoverImgButton from './HoverImgButton.vue'
+import TaskWindow from './TaskWindow.vue'
+import uniqueId from '../../node_modules/lodash/uniqueId'
 
-function  getDate() {
+function getWeekDay() {
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
@@ -57,64 +47,59 @@ export default {
     name: 'ToDoList',
     components: {
         HoverImgButton,
+        TaskWindow
     },
     data() {
         return {
-            todos: ['yes', 'no', 'yes', 'no'],
-            message: getDate(),
-            CrossVisibility: true,
-            pickedIndex: -1
+            TaskWindows: [
+                { id: uniqueId('todo-'), status: false }
+            ],
+            message: getWeekDay()
         }
     },
     methods: {
-		DeleteToDo(index) {
+		deleteTask(index) {
 			this.todos.splice(index, 1);
 		},
-		AddToDo() {
-			this.todos.push('');
-		},
-        ChangeCrossBtnsVisiblity() {
-            this.CrossVisibility = !this.CrossVisibility;
-        },
-        changePickedIndex(index) {
-            this.pickedIndex = index;
-        },
-        changePickedIndexBack() {
-            this.pickedIndex = -1;
-        }
+		addTask() {
+			this.TaskWindows.push({ id: uniqueId('todo-'), status: false });
+		}
     }
 }
-
-// сделать открываютщиеся окна, как на todoist
 
 </script>
 
 <style scoped>
-
-.to-right {
+    .main-container {
+        margin: 100px 0px 0px 300px;
+        width: 80%;
+    }
+    .bold-text-container {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 25px;
+    }
+    .bleak-text-container {
+        display: inline-block;
+        margin-left: 15px;
+        font-size: 13px;
+        color: rgb(127, 127, 127);
+    }
+    ul {
+        list-style-type: none;
+    }
+    li {
+        margin-left: -40px;
+    }
+/* .to-right {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.bold-text-container {
-    display: inline;
-    font-weight: bold;
-    font-size: 25px;
-}
 
-.bleak-text-container {
-    margin-left: 15px;
-    display: inline;
-    font-size: 13px;
-    color: rgb(127, 127, 127);
-}
 
-.container {
-    position: relative;
-    margin-top: 100px;
-    margin-left: 10%;
-}
+
 
 .text-container {
     width: 105%;
@@ -137,6 +122,6 @@ li {
     list-style-type: circle;
     font-size: 25px;
     height: 20px;
-}
+} */
 
 </style>

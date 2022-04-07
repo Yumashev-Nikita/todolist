@@ -2,8 +2,8 @@
     <div class="main-container">
         <table>
             <tr>
-                <td><HoverImgButton type="outline" path="Icon_exit.svg" width="35" height="35" BgColor="#1f1f1f" BgColorHover="#3a3a3a"/></td>
-                <td><HoverImgButton type="outline" path="Icon_home.svg" width="35" height="35" BgColor="#1f1f1f" BgColorHover="#3a3a3a"/></td>
+                <td><HoverImgButton type="outline" path="Icon_exit.svg" padding="10px" borderRadius="15px" BgColor="#1f1f1f" BgColorHover="#3a3a3a"/></td>
+                <td><HoverImgButton type="outline" path="Icon_home.svg" padding="10px" borderRadius="15px" BgColor="#1f1f1f" BgColorHover="#3a3a3a"/></td>
             </tr>
         </table>
     </div>

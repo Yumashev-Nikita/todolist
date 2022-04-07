@@ -9,6 +9,8 @@ export default {
     props: {
         type: String,
         path: String,
+        size: String,
+        borderRadius: String,
         BgColor: String,
         BgColorHover: String
     },
@@ -32,8 +34,8 @@ export default {
 <style scoped>
 
 img {
-    padding: 10px;
-    border-radius: 10px;
+    padding: v-bind(size);
+    border-radius: v-bind(borderRadius);
     background-color: v-bind(bgcolor);
 }
 
