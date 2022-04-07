@@ -6,12 +6,13 @@
             </div>
             <div class="buttons-container">
                 <HoverImgButton v-if="buttonsVisible && !editMode"  @click="changeMode" type="line" path="Icon_edit.svg" size="3px" borderRadius="5px" BgColorHover="#f0f0f0"/>
-                <HoverImgButton v-if="buttonsVisible && !editMode"  @click="changeMode" type="line" path="Icon_menu_point_h.svg" size="3px" borderRadius="5px" BgColorHover="#f0f0f0"/>
+                <HoverImgButton v-if="buttonsVisible && !editMode"  @click="deleteTask" type="line" path="Icon_delete.svg" size="3px" borderRadius="5px" BgColorHover="#f0f0f0"/>
             </div>
         </div>
         <div class="input-container" v-if="editMode"> 
             <textarea v-model="task" placeholder="Описание"></textarea>
-            <button class="save-button-container" @click="changeMode"> Сохранить </button>
+            <!-- <HoverTextButton style="text-align: center; width: 100px" text="Сохранить"/> -->
+            <button class="save-btn"> Сохранить </button>
         </div>
         <hr>
     </div>
@@ -20,25 +21,31 @@
 <script>
 
 import HoverImgButton from './HoverImgButton.vue'
+// import HoverTextButton from './HoverTextButton.vue'
 
 export default {
     name: 'TaskWindow',
     props: {
         status: Boolean,
+        id: String
     },
-    components: {
-        HoverImgButton
+    components: { 
+        HoverImgButton,
+        // HoverTextButton
     },
     data() {
         return {
             editMode: false,
-            task: '',
-            buttonsVisible: false
+            buttonsVisible: false,
+            task: ''
         }
     },
     methods: {
         changeMode() {
             this.editMode = !this.editMode;
+        },
+        deleteTask() {
+            this.$emit('delete-task', this.id);
         },
         setButtonVisibilityTrue() {
             this.buttonsVisible = true;
@@ -53,12 +60,13 @@ export default {
 
 <style scoped>
     .task-main-container {
+        margin-top: 20px;
         width: 60%;
     }
     .task-main-container .task-container .task-text-container {
         position: relative;
-        top: 0;
-        left: 0;
+        max-width: 85%;
+        word-wrap: break-word;
     }
     .task-main-container .task-container {
         position: relative;
@@ -74,11 +82,11 @@ export default {
         width: 100%;
         height: 5rem;
         padding: 12px 20px;
-        margin: 8px 0;
+        margin: 10px 0px 20px 0px;
         box-sizing: border-box;
         border: 1px solid #a1a1a1;
         border-radius: 15px;
-        resize: vertical;
+        resize: none;
     }
     .task-container .buttons-container {
         position: relative;
@@ -86,7 +94,7 @@ export default {
         align-items: center;
         justify-content: space-between;
         margin-top: 0px;
-        width: 80px;
+        width: 70px;
         height: 150%;
     }
     hr {

@@ -3,10 +3,10 @@
     <div class="bold-text-container">Сегодня</div><div class="bleak-text-container">{{ message }}</div>
     <ul>
         <li v-for="item in TaskWindows" :key="item.id">
-            <TaskWindow :status="item.status"/>
+            <TaskWindow @delete-task="deleteTask" :id="item.id"/>
         </li>
         <li>
-            <HoverImgButton @click="addTask" type="line" path="Icon_plus.svg" size="3px" borderRadius="5px" BgColorHover="#f0f0f0"/>
+            <HoverImgButton style="margin-top: 10px" @click="addTask" type="line" path="Icon_plus.svg" size="3px" borderRadius="5px" BgColorHover="#f0f0f0"/>
         </li>
     </ul>
 </div>
@@ -52,17 +52,18 @@ export default {
     data() {
         return {
             TaskWindows: [
-                { id: uniqueId('todo-'), status: false }
+                { id: uniqueId('todo-')},
             ],
             message: getWeekDay()
         }
     },
     methods: {
-		deleteTask(index) {
-			this.todos.splice(index, 1);
+		deleteTask(id) {
+            alert(id);
+			this.TaskWindows.splice(id, 1);
 		},
 		addTask() {
-			this.TaskWindows.push({ id: uniqueId('todo-'), status: false });
+			this.TaskWindows.push({ id: uniqueId('todo-')});
 		}
     }
 }
