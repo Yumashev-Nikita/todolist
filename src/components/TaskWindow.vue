@@ -12,7 +12,7 @@
         <div class="input-container" v-if="editMode"> 
             <textarea v-model="task" placeholder="Описание"></textarea>
             <!-- <HoverTextButton style="text-align: center; width: 100px" text="Сохранить"/> -->
-            <button class="save-btn"> Сохранить </button>
+            <button class="save-btn" @click="changeMode(); setButtonVisibilityFalse()"> Сохранить </button>
         </div>
         <hr>
     </div>
