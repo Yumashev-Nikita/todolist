@@ -2,7 +2,7 @@
     <div class="task-main-container" @mouseenter="setButtonVisibilityTrue" @mouseleave="setButtonVisibilityFalse">
         <div class="task-container" v-if="!editMode">
             <div class="task-text-container">
-                {{ task }}
+                {{ id }}
             </div>
             <div class="buttons-container">
                 <HoverImgButton v-if="buttonsVisible && !editMode"  @click="changeMode" type="line" path="Icon_edit.svg" size="3px" borderRadius="5px" BgColorHover="#f0f0f0"/>

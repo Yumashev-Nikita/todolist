@@ -3,7 +3,7 @@
     <div class="bold-text-container">Сегодня</div><div class="bleak-text-container">{{ message }}</div>
     <ul>
         <li v-for="item in TaskWindows" :key="item.id">
-            <TaskWindow @delete-task="deleteTask" :id="item.id"></TaskWindow>
+            <TaskWindow @delete-task="deleteTask" :id="item.id"/>
         </li>
         <li>
             <HoverImgButton style="margin-top: 10px" @click="addTask" type="line" path="Icon_plus.svg" size="3px" borderRadius="5px" BgColorHover="#f0f0f0"/>
