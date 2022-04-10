@@ -59,7 +59,7 @@ export default {
     },
     methods: {
 		deleteTask(id) {
-			this.TaskWindows.splice({id}, 1);
+			this.TaskWindows.splice(id, 1);
 		},
 		addTask() {
 			this.TaskWindows.push({id: uniqueId('todo-')});
