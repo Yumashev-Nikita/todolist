@@ -26,7 +26,6 @@ import HoverImgButton from './HoverImgButton.vue'
 export default {
     name: 'TaskWindow',
     props: {
-        status: Boolean,
         id: String
     },
     components: { 

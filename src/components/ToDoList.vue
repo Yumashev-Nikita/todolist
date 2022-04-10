@@ -43,6 +43,11 @@ function getWeekDay() {
     return weekday + " " + day + "." + month + "." + year;
 }
 
+const pickTask = function(element) {
+    console.log(element.id == this.id);
+    return element.id !== this.id;
+}
+
 export default {
     name: 'ToDoList',
     components: {
@@ -52,17 +57,17 @@ export default {
     data() {
         return {
             TaskWindows: [
-                {id: uniqueId('todo-')},
+                {id: uniqueId('')},
             ],
             message: getWeekDay()
         }
     },
     methods: {
-		deleteTask(id) {
-			this.TaskWindows.splice(id, 1);
+		deleteTask(index) {
+			this.TaskWindows = this.TaskWindows.filter(pickTask, {id: index});
 		},
 		addTask() {
-			this.TaskWindows.push({id: uniqueId('todo-')});
+			this.TaskWindows.push({id: uniqueId('')});
 		}
     }
 }
