@@ -44,7 +44,7 @@ function getWeekDay() {
 }
 
 const pickTask = function(element) {
-    console.log(element.id == this.id);
+    // console.log('elem.id = ' + element.id + 'and this.id = ' + this.id);
     return element.id !== this.id;
 }
 
